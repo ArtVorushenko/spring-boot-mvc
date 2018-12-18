@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Let's get party started!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Will you join the party?</h1>
+<form action="#" th:action="@{/addToList}" th:object="${requestForParty}" method="post">
+    <p>My name is <input type="text" th:field="*{name}" required="required"/></p>
+    <p>My age is <input type="number" th:field="*{age}"/></p>
+    <p>I am a
+        <select th:field="*{gender}">
+            <option th:each="gender : ${T(com.itransition.partylist.models.Gender).values()}"
+                    th:value="${gender}"
+                    th:text="${gender}">
+            </option>
+        </select>
+    </p>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+</body>
+</html>
