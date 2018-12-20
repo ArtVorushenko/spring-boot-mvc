@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Will you join the party?</h1>
+<span th:text="${error}" style="color: crimson"></span>
 <form action="#" th:action="@{/addToList}" th:object="${requestForParty}" method="post">
     <p>My name is <input type="text" th:field="*{name}" required="required"/></p>
     <p>My age is <input type="number" th:field="*{age}"/></p>
