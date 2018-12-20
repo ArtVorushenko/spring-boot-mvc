@@ -1,11 +1,18 @@
 package com.itransition.partylist.models;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class JoinPartyRequest {
 
+    @NotEmpty
     private String name;
 
+    @Min(18)
     private Integer age;
 
+    @NotNull
     private Gender gender;
 
     public String getName() {
