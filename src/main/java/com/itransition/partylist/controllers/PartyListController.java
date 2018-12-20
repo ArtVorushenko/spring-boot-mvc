@@ -1,6 +1,8 @@
 package com.itransition.partylist.controllers;
 
 import com.itransition.partylist.models.JoinPartyRequest;
+import com.itransition.partylist.services.PartyListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,9 @@ import javax.validation.Valid;
 
 @Controller
 public class PartyListController {
+
+    @Autowired
+    private PartyListService partyListService;
 
     @GetMapping("/")
     public String entryPoint(Model model) {
@@ -27,6 +32,7 @@ public class PartyListController {
             redirectAttributes.addFlashAttribute("error", "Some of the fields have invalid values.");
             return "redirect:/";
         } else {
+            partyListService.registerNewMember(request);
             redirectAttributes.addFlashAttribute("name", request.getName());
             return "redirect:/success";
         }
