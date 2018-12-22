@@ -14,18 +14,16 @@ public class PartyListService {
     @Autowired
     private PartyMemberRepository repository;
 
+    @Autowired
+    private RegistrationConstraint registrationConstraint;
+
     public void registerNewMember(JoinPartyRequest request) throws RegistrationFailedException {
-        if (registrationAllowed(request)) {
+        if (registrationConstraint.registrationAllowed(request)) {
             PartyMemberEntity entity = new PartyMemberEntity(request.getName(), request.getAge(), request.getGender());
             repository.save(entity);
         } else {
             throw new RegistrationFailedException();
         }
-    }
-
-    private boolean registrationAllowed(JoinPartyRequest request) {
-        return Gender.FEMALE.equals(request.getGender())
-                || repository.countByGender(Gender.FEMALE) >= repository.countByGender(Gender.MALE);
     }
 
 }
